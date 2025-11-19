@@ -1,23 +1,4 @@
-# Stackless Coroutine Library — Implementing User-Space Microthreads in C
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Language](https://img.shields.io/badge/language-C11-orange.svg)](https://en.wikipedia.org/wiki/C11_(C_standard_revision))
-[![Platform](https://img.shields.io/badge/platform-Linux-lightgrey.svg)](https://www.linux.org/)
-
-A comprehensive OS semester project comparing **stackless** and **stackful (ucontext)** coroutine implementations in C, with nanosecond-precision performance benchmarking and Python visualization.
-
-## 📋 Table of Contents
-
-- [Overview](#overview)
-- [Features](#features)
-- [Project Structure](#project-structure)
-- [Requirements](#requirements)
-- [Quick Start](#quick-start)
-- [Detailed Usage](#detailed-usage)
-- [Implementation Details](#implementation-details)
-- [Benchmark Results](#benchmark-results)
-- [Performance Analysis](#performance-analysis)
-- [Team Information](#team-information)
 
 ## 🎯 Overview
 
@@ -93,57 +74,6 @@ Or use the Makefile target:
 ```bash
 make install-deps
 ```
-
-## 🚀 Quick Start
-
-### Method 1: Automated Script (Recommended)
-
-```bash
-# Make script executable
-chmod +x run_all.sh
-
-# Run complete benchmark suite
-./run_all.sh
-```
-
-This will:
-1. Check dependencies
-2. Compile the project
-3. Run both benchmarks
-4. Generate visualizations
-5. Display results
-
-### Method 2: Manual Compilation
-
-```bash
-# Compile everything
-make
-
-# Run benchmarks
-make benchmark
-
-# Or run individually
-make run-stackless
-make run-ucontext
-```
-
-### Method 3: Step-by-Step
-
-```bash
-# 1. Compile
-make all
-
-# 2. Run stackless benchmark
-./bin/bench stackless
-
-# 3. Run ucontext benchmark
-./bin/bench ucontext
-
-# 4. Generate plots
-python3 scripts/plot_results.py
-```
-
-## 📖 Detailed Usage
 
 ### Building the Project
 
@@ -314,51 +244,6 @@ context.uc_stack.ss_size = CORO_STACK_SIZE;
 - Ruby fibers
 - Python generators (hybrid approach)
 
-## 🏗️ Development
-
-### Modifying the Code
-
-**Adding New Coroutine Functions**:
-```c
-// Stackless example
-void my_coroutine(coro_stackless_t *coro, void *arg) {
-    CORO_BEGIN(coro);
-    
-    // Your code here
-    CORO_YIELD(coro);  // Yield execution
-    
-    // More code
-    
-    CORO_END(coro);
-}
-
-// Ucontext example
-void my_ucoroutine(void *arg) {
-    // Your code here
-    coro_ucontext_yield();  // Yield execution
-    // More code
-}
-```
-
-**Modifying Benchmark Parameters**:
-
-Edit `src/bench.c`:
-```c
-#define NUM_SWITCHES 10000000   // Number of context switches
-#define NUM_SAMPLES 10          // Number of benchmark runs
-```
-
-### Debugging
-
-Enable debug output:
-```bash
-# Compile with debug symbols
-make clean
-CFLAGS="-g -O0" make
-
-# Run with GDB
-gdb ./bin/bench
-```
 
 ## 🔍 Troubleshooting
 
@@ -411,27 +296,6 @@ chmod +x run_all.sh
 - libco: https://github.com/higan-emu/libco
 - Boost.Context: https://www.boost.org/doc/libs/release/libs/context/
 
-## 👥 Team Information
-
-**Project**: Stackless Coroutine Library  
-**Course**: Operating Systems (CS-XXX)  
-**Duration**: 4 months  
-**Team Size**: 3 members  
-
-### Contributions
-
-This project demonstrates:
-- ✅ Deep understanding of context switching
-- ✅ Low-level C programming proficiency
-- ✅ Performance analysis and optimization
-- ✅ Data visualization and reporting
-- ✅ Build system configuration
-- ✅ Technical documentation
-
-## 📝 License
-
-This project is provided for educational purposes. Feel free to use, modify, and distribute with attribution.
-
 ## 🎯 Learning Outcomes
 
 By completing this project, you will understand:
@@ -456,35 +320,3 @@ By completing this project, you will understand:
    - Build systems (Make)
    - Automation scripting
 
-## 🚧 Future Enhancements
-
-Potential extensions for this project:
-
-- [ ] Add ARM architecture support
-- [ ] Implement coroutine scheduling algorithms
-- [ ] Add multi-threaded benchmark scenarios
-- [ ] Integrate with libuv or libev
-- [ ] Add Windows fiber API implementation
-- [ ] Create language bindings (Python, Rust)
-- [ ] Implement coroutine pools and caching
-- [ ] Add memory usage profiling
-- [ ] Support coroutine priorities
-- [ ] Build a task scheduler on top
-
-## 🆘 Support
-
-If you encounter issues:
-
-1. Check the [Troubleshooting](#troubleshooting) section
-2. Review the code comments for implementation details
-3. Examine the Makefile for build configuration
-4. Run with verbose output: `make V=1`
-
-## 🌟 Acknowledgments
-
-- POSIX standards committee for ucontext API
-- Simon Tatham for stackless coroutine techniques
-- Linux kernel developers for inspiration
-- Open source community for various coroutine libraries
-
----
